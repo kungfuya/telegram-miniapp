@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aviator Hack Premium</title>
+  <meta name="theme-color" content="#041021"/>
+  <style>
+    :root{--bg1:#041021;--bg2:#0b3b6f;--card:#07112a;--muted:#9fb0c8;--accent:#ff7a59}
+    html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans',Arial;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#e6eef8}
+    .wrap{max-width:520px;margin:40px auto;padding:18px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));border-radius:14px;padding:20px;box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    h1{margin:0 0 6px;font-size:22px;letter-spacing:0.3px}
+    p{margin:0 0 12px;color:var(--muted)}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:14px}
+    .buttons{display:flex;gap:10px}
+    button{flex:1;padding:10px 12px;border-radius:10px;border:none;font-weight:700;cursor:pointer;background:rgba(255,255,255,0.03);color:#e6eef8}
+    button.primary{background:linear-gradient(90deg,var(--accent),#ffb777);color:#08121a;box-shadow:0 6px 18px rgba(255,122,89,0.12)}
+    button.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+    .note{margin-top:12px;font-size:13px;color:var(--muted)}
+    footer{text-align:center;margin-top:18px;font-size:12px;color:#88a7bf}
+    .small{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main">
+      <h1>Aviator Hack Premium</h1>
+      <p class="meta">Fast signals • Lite dashboard • No payment integrated (add later)</p>
+      <div id="greet">Welcome — Open this inside Telegram</div>
+      <div class="small" id="tid" style="margin-top:6px"></div>
+
+      <div style="height:12px"></div>
+      <div class="buttons">
+        <button id="playBtn" class="primary">Play Signal</button>
+        <button id="depositBtn">Deposit</button>
+        <button id="closeBtn" class="ghost">Close</button>
+      </div>
+
+      <div class="note">Tip: Use "Deposit" to link to your payment page later. This page is ready for GitHub Pages hosting.</div>
+      <footer>Built for Telegram WebApp • Aviator Hack Premium</footer>
+    </div>
+  </div>
+
+  <script>
+    const tg = window.Telegram && window.Telegram.WebApp;
+    const greetEl = document.getElementById('greet');
+    const tidEl = document.getElementById('tid');
+    function notInTelegram() {
+      greetEl.textContent = 'Open this page from the Telegram app to enable WebApp features.';
+      tidEl.textContent = '';
+      document.getElementById('playBtn').disabled = true;
+    }
+    if (!tg) {
+      notInTelegram();
+    } else {
+      try {
+        tg.expand && tg.expand();
+      } catch(e){}
+      const initUnsafe = tg.initDataUnsafe || {};
+      const user = initUnsafe.user || {};
+      const name = user.first_name ? (user.first_name + (user.last_name ? (' ' + user.last_name) : '')) : 'Friend';
+      greetEl.textContent = 'Hello, ' + name;
+      tidEl.textContent = 'Telegram ID: ' + (user.id || 'hidden');
+
+      document.getElementById('playBtn').addEventListener('click', () => {
+        const payload = {action:'play', ts: Date.now()};
+        try {
+          tg.sendData(JSON.stringify(payload));
+        } catch(e) {
+          // fallback: open link
+          tg.openLink('https://example.com');
+        }
+      });
+
+      document.getElementById('depositBtn').addEventListener('click', () => {
+        // Replace with your deposit URL when ready
+        const depositUrl = 'https://your-payment-page.example.com';
+        tg.openLink(depositUrl);
+      });
+
+      document.getElementById('closeBtn').addEventListener('click', () => {
+        try { tg.close(); } catch(e){ window.close(); }
+      });
+    }
+  </script>
+</body>
+</html>
