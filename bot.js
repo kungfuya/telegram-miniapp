@@ -8,7 +8,7 @@ if (token === 'REPLACE_WITH_YOUR_BOT_TOKEN') console.warn('Set 7991288164:AAEw_z
 const bot = new TelegramBot(token, { polling: true });
 
 bot.onText(/\/start/, (msg) => {
-  const chatId = msg.chat.id;
+  const chatId = msg.6854936117;
   const webAppUrl = 'https://kungfuya.github.io/telegram-miniapp/'; // <- replace with your GitHub Pages URL
   bot.sendMessage(chatId, '🚀 Open Aviator Hack Premium:', {
     reply_markup: {
