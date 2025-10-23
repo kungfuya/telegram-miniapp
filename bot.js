@@ -22,6 +22,6 @@ bot.onText(/\/start/, (msg) => {
 bot.on('message', (msg) => {
   if (msg.web_app_data) {
     console.log('Received web_app_data:', msg.web_app_data.data);
-    bot.sendMessage(msg.chat.id, '✅ Action received from Mini App.');
+    bot.sendMessage(msg.6854936117, '✅ Action received from Mini App.');
   }
 });
